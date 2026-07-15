@@ -525,7 +525,6 @@ func saveHTMLReport(htmlContent, filename string) (string, error) {
 	return absolutePath, nil
 }
 
-
 // offerHTMLReport prompts the user to generate and save an HTML report, shared
 // across the scanners.
 func offerHTMLReport(scanType string, scanState *ScanState, startTime int64) {
