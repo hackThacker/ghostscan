@@ -1,0 +1,52 @@
+# ── Binaries ──────────────────────────────────────────────────────
+ghostscan
+ghostscan.exe
+ghostscan-update
+ghostscan-update.exe
+*.exe
+*.out
+*.test
+
+# ── Release / dist ────────────────────────────────────────────────
+dist/
+release/
+*.zip
+*_checksums.txt
+
+# ── Go tool artifacts ─────────────────────────────────────────────
+vendor/
+*.mod.bak
+*.sum.bak
+
+# ── Test artifacts ────────────────────────────────────────────────
+coverage.out
+coverage.html
+*.prof
+*.trace
+testdata/tmp/
+
+# ── OS generated ──────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── IDE / Editor ──────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+*.bak
+*.orig
+.env
+.env.*
+
+# ── Logs / Temporary ──────────────────────────────────────────────
+*.log
+tmp/
+temp/

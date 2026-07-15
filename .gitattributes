@@ -1,0 +1,29 @@
+# Ensure consistent line endings across platforms
+* text=auto
+
+# Go source — LF
+*.go text eol=lf
+go.mod text eol=lf
+go.sum text eol=lf
+Makefile text eol=lf
+
+# Documentation / config — LF
+*.md text eol=lf
+*.txt text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+LICENSE text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Scripts — keep native on Windows, LF elsewhere
+*.ps1 text eol=crlf
+*.sh text eol=lf
+
+# Payload files — LF
+payloads/** text eol=lf
+
+# Binaries
+*.exe binary
+*.zip binary
