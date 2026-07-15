@@ -112,7 +112,7 @@ The LFI, SQLi, and CRLF scanners use standard Go HTTP client requests. However, 
   sudo apt update
 
   # Install Chromium (headless mode support)
-  sudo apt install -y chromium-browser
+  sudo apt install -y chromium
   ```
 
 ---
