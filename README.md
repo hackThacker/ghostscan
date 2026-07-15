@@ -53,23 +53,23 @@ Available archives:
 
 | Platform | Archive |
 |---|---|
-| Linux amd64 | `ghostscan_v2.1.1_linux_amd64.zip` |
-| Linux arm64 | `ghostscan_v2.1.1_linux_arm64.zip` |
-| macOS amd64 | `ghostscan_v2.1.1_darwin_amd64.zip` |
-| macOS arm64 | `ghostscan_v2.1.1_darwin_arm64.zip` |
-| Windows amd64 | `ghostscan_v2.1.1_windows_amd64.zip` |
-| Windows arm64 | `ghostscan_v2.1.1_windows_arm64.zip` |
+| Linux amd64 | `ghostscan_v2.1.2_linux_amd64.zip` |
+| Linux arm64 | `ghostscan_v2.1.2_linux_arm64.zip` |
+| macOS amd64 | `ghostscan_v2.1.2_darwin_amd64.zip` |
+| macOS arm64 | `ghostscan_v2.1.2_darwin_arm64.zip` |
+| Windows amd64 | `ghostscan_v2.1.2_windows_amd64.zip` |
+| Windows arm64 | `ghostscan_v2.1.2_windows_arm64.zip` |
 
 Extract and run:
 
 ```bash
 # Linux / macOS
-unzip ghostscan_v2.1.1_linux_amd64.zip
+unzip ghostscan_v2.1.2_linux_amd64.zip
 chmod +x ghostscan
 ./ghostscan
 
 # Windows (PowerShell)
-Expand-Archive ghostscan_v2.1.1_windows_amd64.zip .
+Expand-Archive ghostscan_v2.1.2_windows_amd64.zip .
 .\ghostscan.exe
 ```
 
@@ -77,10 +77,10 @@ Expand-Archive ghostscan_v2.1.1_windows_amd64.zip .
 >
 > ```bash
 > # Linux / macOS
-> sha256sum -c ghostscan_v2.1.1_checksums.txt
+> sha256sum -c ghostscan_v2.1.2_checksums.txt
 >
 > # Windows (PowerShell)
-> Get-Content ghostscan_v2.1.1_checksums.txt | ForEach-Object {
+> Get-Content ghostscan_v2.1.2_checksums.txt | ForEach-Object {
 >     $hash, $file = $_ -split ' ', 2
 >     $actual = (Get-FileHash $file.Trim() -Algorithm SHA256).Hash.ToLower()
 >     if ($actual -eq $hash.Replace('sha256:','')) { "OK: $file" } else { "MISMATCH: $file" }
@@ -90,69 +90,30 @@ Expand-Archive ghostscan_v2.1.1_windows_amd64.zip .
 ### Install via `go install`
 
 ```bash
-go install github.com/hackthacker/ghostscan@latest
+go install -v github.com/hackthacker/ghostscan@latest
 ```
 
 > Requires Go 1.22 or later.
 
 ---
 
-## Build from Source
-
-```bash
-# Clone the repository
-git clone https://github.com/hackThacker/ghostscan.git
-cd ghostscan
-
-# Build for your local OS/arch
-go build -ldflags="-s -w" -o ghostscan .
-
-# Run
-./ghostscan          # Linux / macOS
-.\ghostscan.exe      # Windows
-```
-
-### Cross-compile
-
-```bash
-# Linux amd64
-GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o ghostscan .
-
-# Linux arm64
-GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o ghostscan .
-
-# macOS amd64
-GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o ghostscan .
-
-# macOS arm64 (Apple Silicon)
-GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o ghostscan .
-
-# Windows amd64
-GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o ghostscan.exe .
-
-# Windows arm64
-GOOS=windows GOARCH=arm64 go build -ldflags="-s -w" -o ghostscan.exe .
-```
-
-### Build all release archives (PowerShell)
-
-```powershell
-# From the project root on Windows:
-.\scripts\build_release.ps1
-```
-
-This produces all 6 platform archives under `dist/` plus a SHA256 checksums file.
-
----
-
 ## Requirements
 
-| Requirement | Details |
-|---|---|
-| Go | 1.22 or later (build from source) |
-| Chrome / Chromium | Required **at runtime** for the XSS and OR scanners only |
+The LFI, SQLi, and CRLF scanners use standard Go HTTP client requests. However, the **XSS and OR scanners require a headless browser at runtime**.
 
-The LFI, SQLi, and CRLF scanners use the standard HTTP client — no browser needed.
+### Installing Chrome/Chromium
+
+- **Windows**: Install [Google Chrome](https://www.google.com/chrome/) or Microsoft Edge. They are automatically discovered by the tool.
+- **Linux / WSL (Windows Subsystem for Linux)**:
+  WSL users must install Chromium inside their WSL Linux distribution. Otherwise, XSS and OR scanners will fail to start.
+  Run the following commands in your WSL terminal:
+  ```bash
+  # Update apt packages
+  sudo apt update
+
+  # Install Chromium (headless mode support)
+  sudo apt install -y chromium-browser
+  ```
 
 ---
 

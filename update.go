@@ -195,6 +195,6 @@ func versionCompare(a, b string) (int, error) {
 }
 
 // VERSION is the GhostScan build version (mirrors the original Python VERSION constant).
-const VERSION = "v2.1.1"
+const VERSION = "v2.1.2"
 
 

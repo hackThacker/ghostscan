@@ -1,4 +1,4 @@
-## GhostScan v2.1.1
+## GhostScan v2.1.2
 
 Multi-threaded web vulnerability scanner for LFI, Open Redirect, SQL Injection, XSS, and CRLF Injection.
 
@@ -16,14 +16,14 @@ Multi-threaded web vulnerability scanner for LFI, Open Redirect, SQL Injection, 
 
 | Platform | Archive |
 |---|---|
-| Linux amd64 | `ghostscan_v2.1.1_linux_amd64.zip` |
-| Linux arm64 | `ghostscan_v2.1.1_linux_arm64.zip` |
-| macOS amd64 | `ghostscan_v2.1.1_darwin_amd64.zip` |
-| macOS arm64 | `ghostscan_v2.1.1_darwin_arm64.zip` |
-| Windows amd64 | `ghostscan_v2.1.1_windows_amd64.zip` |
-| Windows arm64 | `ghostscan_v2.1.1_windows_arm64.zip` |
+| Linux amd64 | `ghostscan_v2.1.2_linux_amd64.zip` |
+| Linux arm64 | `ghostscan_v2.1.2_linux_arm64.zip` |
+| macOS amd64 | `ghostscan_v2.1.2_darwin_amd64.zip` |
+| macOS arm64 | `ghostscan_v2.1.2_darwin_arm64.zip` |
+| Windows amd64 | `ghostscan_v2.1.2_windows_amd64.zip` |
+| Windows arm64 | `ghostscan_v2.1.2_windows_arm64.zip` |
 
-Verify your download using `ghostscan_v2.1.1_checksums.txt`.
+Verify your download using `ghostscan_v2.1.2_checksums.txt`.
 
 ### Requirements
 
@@ -33,5 +33,5 @@ Verify your download using `ghostscan_v2.1.1_checksums.txt`.
 ### Install via go install
 
 ```bash
-go install github.com/hackthacker/ghostscan@latest
+go install -v github.com/hackthacker/ghostscan@latest
 ```
