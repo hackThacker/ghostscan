@@ -53,23 +53,23 @@ Available archives:
 
 | Platform | Archive |
 |---|---|
-| Linux amd64 | `ghostscan_v2.1.0_linux_amd64.zip` |
-| Linux arm64 | `ghostscan_v2.1.0_linux_arm64.zip` |
-| macOS amd64 | `ghostscan_v2.1.0_darwin_amd64.zip` |
-| macOS arm64 | `ghostscan_v2.1.0_darwin_arm64.zip` |
-| Windows amd64 | `ghostscan_v2.1.0_windows_amd64.zip` |
-| Windows arm64 | `ghostscan_v2.1.0_windows_arm64.zip` |
+| Linux amd64 | `ghostscan_v2.1.1_linux_amd64.zip` |
+| Linux arm64 | `ghostscan_v2.1.1_linux_arm64.zip` |
+| macOS amd64 | `ghostscan_v2.1.1_darwin_amd64.zip` |
+| macOS arm64 | `ghostscan_v2.1.1_darwin_arm64.zip` |
+| Windows amd64 | `ghostscan_v2.1.1_windows_amd64.zip` |
+| Windows arm64 | `ghostscan_v2.1.1_windows_arm64.zip` |
 
 Extract and run:
 
 ```bash
 # Linux / macOS
-unzip ghostscan_v2.1.0_linux_amd64.zip
+unzip ghostscan_v2.1.1_linux_amd64.zip
 chmod +x ghostscan
 ./ghostscan
 
 # Windows (PowerShell)
-Expand-Archive ghostscan_v2.1.0_windows_amd64.zip .
+Expand-Archive ghostscan_v2.1.1_windows_amd64.zip .
 .\ghostscan.exe
 ```
 
@@ -77,10 +77,10 @@ Expand-Archive ghostscan_v2.1.0_windows_amd64.zip .
 >
 > ```bash
 > # Linux / macOS
-> sha256sum -c ghostscan_v2.1.0_checksums.txt
+> sha256sum -c ghostscan_v2.1.1_checksums.txt
 >
 > # Windows (PowerShell)
-> Get-Content ghostscan_v2.1.0_checksums.txt | ForEach-Object {
+> Get-Content ghostscan_v2.1.1_checksums.txt | ForEach-Object {
 >     $hash, $file = $_ -split ' ', 2
 >     $actual = (Get-FileHash $file.Trim() -Algorithm SHA256).Hash.ToLower()
 >     if ($actual -eq $hash.Replace('sha256:','')) { "OK: $file" } else { "MISMATCH: $file" }

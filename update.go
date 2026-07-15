@@ -196,7 +196,7 @@ func versionCompare(a, b string) (int, error) {
 }
 
 // VERSION is the GhostScan build version (mirrors the original Python VERSION constant).
-const VERSION = "v2.1.0"
+const VERSION = "v2.1.1"
 
 // gitHubReleasePattern is unused but kept as a reference for sanity checks.
 var gitHubReleasePattern = regexp.MustCompile(`^v?\d+\.\d+\.\d+`)
