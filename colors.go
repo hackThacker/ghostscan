@@ -6,8 +6,6 @@ import (
 	"os/exec"
 	"runtime"
 	"strings"
-	"syscall"
-	"unsafe"
 )
 
 // ANSI color constants mirroring the Python Color class and colorama Fore/Style.
@@ -28,31 +26,6 @@ const (
 	colorLightBlack = "\033[90m"
 	colorMagenta    = "\033[95m"
 )
-
-// enableWindowsVT enables virtual terminal processing on Windows consoles so
-// ANSI escape sequences render correctly. On non-Windows it is a no-op.
-func enableWindowsVT() {
-	if runtime.GOOS != "windows" {
-		return
-	}
-	const enableVirtualTerminla = 0x0004
-	kernel32 := syscall.NewLazyDLL("kernel32.dll")
-	getConsoleMode := kernel32.NewProc("GetConsoleMode")
-	setConsoleMode := kernel32.NewProc("SetConsoleMode")
-	getConsoleHandle := kernel32.NewProc("GetStdHandle")
-	const stdOutputHandle = ^uintptr(0) - 11 + 1 // STD_OUTPUT_HANDLE = -11
-	handle, _, _ := getConsoleHandle.Call(uintptr(stdOutputHandle))
-	if handle == uintptr(0) {
-		return
-	}
-	var mode uint32
-	res, _, _ := getConsoleMode.Call(handle, uintptr(unsafe.Pointer(&mode)))
-	if res == 0 {
-		return
-	}
-	mode |= enableVirtualTerminla
-	setConsoleMode.Call(handle, uintptr(mode))
-}
 
 // clearScreen clears the terminal screen.
 func clearScreen() {
