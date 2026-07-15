@@ -72,14 +72,4 @@ func (rt *retryTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	return lastResp, lastErr
 }
 
-// newRequestWithUA creates a GET request with a random User-Agent header.
-func newRequestWithUA(targetURL string) (*http.Request, error) {
-	req, err := http.NewRequest("GET", targetURL, nil)
-	if err != nil {
-		return nil, err
-	}
-	req.Header.Set("User-Agent", randomUserAgent())
-	req.Header.Set("Accept", "*/*")
-	req.Header.Set("Connection", "close")
-	return req, nil
-}
+

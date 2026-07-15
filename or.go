@@ -74,10 +74,10 @@ func runORScanner() {
 		parts, err := splitPoolURL(fullURL)
 		if err != nil || parts.Query == "" {
 			// Path-based testing.
-			testPathBased(ctxSlots, cancelSlots, workerCount, parts.Scheme, parts.Host, parts.Path, payloads, state)
+			testPathBased(ctxSlots, workerCount, parts.Scheme, parts.Host, parts.Path, payloads, state)
 		} else {
 			params := parseQueryString(parts.Query)
-			testParamBased(ctxSlots, cancelSlots, workerCount, parts.Scheme, parts.Host, parts.Path, params, payloads, state)
+			testParamBased(ctxSlots, workerCount, parts.Scheme, parts.Host, parts.Path, params, payloads, state)
 		}
 	}
 
@@ -142,7 +142,7 @@ func splitPoolURL(s string) (*parsedURL, error) {
 	}, nil
 }
 
-func testPathBased(ctxSlots chan context.Context, cancelSlots chan context.CancelFunc, workers int, scheme, host, path string, payloads []string, state *ScanState) {
+func testPathBased(ctxSlots chan context.Context, workers int, scheme, host, path string, payloads []string, state *ScanState) {
 	type job struct{ payload string }
 	jobs := make(chan job)
 	var wg sync.WaitGroup
@@ -153,7 +153,7 @@ func testPathBased(ctxSlots chan context.Context, cancelSlots chan context.Cance
 			for j := range jobs {
 				ctx := <-ctxSlots
 				testURL := scheme + "://" + host + path + j.payload
-				runORTest(ctx, testURL, j.payload, "path", state)
+				runORTest(ctx, testURL, "path", state)
 				ctxSlots <- ctx
 			}
 		}()
@@ -165,8 +165,7 @@ func testPathBased(ctxSlots chan context.Context, cancelSlots chan context.Cance
 	wg.Wait()
 }
 
-func testParamBased(ctxSlots chan context.Context, cancelSlots chan context.CancelFunc, workers int, scheme, host, path string, params map[string][]string, payloads []string, state *ScanState) {
-	_ = cancelSlots
+func testParamBased(ctxSlots chan context.Context, workers int, scheme, host, path string, params map[string][]string, payloads []string, state *ScanState) {
 	type job struct {
 		payload string
 		param   string
@@ -192,7 +191,7 @@ func testParamBased(ctxSlots chan context.Context, cancelSlots chan context.Canc
 					}
 				}
 				testURL := buildQueryURL(scheme, host, path, modParams, "")
-				runORTest(ctx, testURL, j.payload, j.param, state)
+				runORTest(ctx, testURL, j.param, state)
 				ctxSlots <- ctx
 			}
 		}()
@@ -208,7 +207,7 @@ func testParamBased(ctxSlots chan context.Context, cancelSlots chan context.Canc
 
 // runORTest navigates to testURL using ctx, waits for document readyState, then
 // inspects window.location.href for "google.com" in the netloc.
-func runORTest(ctx context.Context, testURL, payload, paramName string, state *ScanState) {
+func runORTest(ctx context.Context, testURL, paramName string, state *ScanState) {
 	var location string
 	fmt.Printf("%s[→] Testing %s: %s%s%s\n", colorYellow, paramName, colorCyan, testURL, colorReset)
 	err := chromedp.Run(ctx,

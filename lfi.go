@@ -211,10 +211,4 @@ func roundTime(start time.Time) time.Duration {
 	return time.Since(start)
 }
 
-// padTo returns s right-padded to width with spaces (if shorter).
-func padTo(s string, width int) string {
-	if len(s) >= width {
-		return s
-	}
-	return s + repeatStr(" ", width-len(s))
-}
+

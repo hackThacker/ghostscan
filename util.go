@@ -99,23 +99,4 @@ func promptForPayloads(welcomeMsg string) []string {
 	}
 }
 
-// promptForValidFilePath keeps prompting for a valid file path (XSS scanner style).
-func promptForValidFilePath(welcomeMsg, promptText string) string {
-	for {
-		path := strings.TrimSpace(promptFilePath(promptText))
-		if path == "" {
-			fmt.Println(colorRed + "[!] You must provide a file containing the payloads.")
-			pausePrompt()
-			clearScreen()
-			colorPrintln(colorGreen, welcomeMsg)
-			continue
-		}
-		if fileExists(path) {
-			return path
-		}
-		fmt.Println(colorRed + "[!] Error reading the input file.")
-		pausePrompt()
-		clearScreen()
-		colorPrintln(colorGreen, welcomeMsg)
-	}
-}
+

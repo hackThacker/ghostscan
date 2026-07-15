@@ -5,27 +5,6 @@ import (
 	"strings"
 )
 
-// parseURL separates a URL into scheme, netloc, path, query, and fragment,
-// mirroring urlsplit from the Python source.
-func parseURL(rawURL string) (scheme, netloc, path, query, fragment string) {
-	if !strings.Contains(rawURL, "://") {
-		rawURL = "http://" + rawURL
-	}
-	u, err := url.Parse(rawURL)
-	if err != nil || u == nil {
-		return "", "", "", "", ""
-	}
-	scheme = u.Scheme
-	netloc = u.Host
-	path = u.Path
-	if path == "" {
-		path = "/"
-	}
-	query = u.RawQuery
-	fragment = u.Fragment
-	return
-}
-
 // joinURL reconstructs a URL from its components, mirroring urlunsplit.
 func joinURL(scheme, netloc, path, query, fragment string) string {
 	u := &url.URL{
@@ -136,19 +115,3 @@ func splitURL(rawURL string) (scheme, netloc, path, query, fragment string) {
 	return
 }
 
-// urlNetloc returns just the host:port portion of a URL, lower-cased.
-func urlNetloc(rawURL string) string {
-	u, err := url.Parse(rawURL)
-	if err != nil || u == nil {
-		return ""
-	}
-	return strings.ToLower(u.Host)
-}
-
-// addScheme prefixes http:// if the input URL has no scheme.
-func addScheme(rawURL string) string {
-	if !strings.Contains(rawURL, "://") {
-		return "http://" + rawURL
-	}
-	return rawURL
-}

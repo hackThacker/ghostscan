@@ -55,11 +55,6 @@ func repeatStr(s string, n int) string {
 	return strings.Repeat(s, n)
 }
 
-// colorPrint prints a message with the given ANSI color prefix, then resets.
-func colorPrint(color, msg string) {
-	fmt.Print(color + msg + colorReset)
-}
-
 // colorPrintln prints a message with color and a trailing newline.
 func colorPrintln(color, msg string) {
 	fmt.Println(color + msg + colorReset)

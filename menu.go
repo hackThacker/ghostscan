@@ -32,7 +32,7 @@ func displayMenu() {
 	}
 
 	fmt.Println(borderColor + "└" + repeatStr("─", 72) + "┘")
-	authors := "Created by hackthacker | github.com/hackthacker"
+	authors := fmt.Sprintf("Created by hackthacker | github.com/hackthacker | Version: %s", version)
 	instructions := "Select an option by entering the corresponding number:"
 
 	fmt.Println(colorWhite + colorBold + repeatStr("─", 72))
@@ -170,20 +170,6 @@ func printScanSummaryBox(totalFound, totalScanned int, timeTaken int64) {
 		fmt.Print(colorReset + "\n")
 	}
 	fmt.Print(colorYellow + borderBot + colorReset + "\n")
-}
-
-// printScanSummaryPlain prints the summary lines without the box (XSS scanner
-// uses a plain list per the Python source at line 1130).
-func printScanSummaryPlain(totalFound, totalScanned int, timeTaken int64) {
-	lines := []string{
-		"→ Scanning finished.",
-		fmt.Sprintf("• Total found: %s%d%s", colorGreen, totalFound, colorYellow),
-		fmt.Sprintf("• Total scanned: %d", totalScanned),
-		fmt.Sprintf("• Time taken: %d seconds", timeTaken),
-	}
-	for _, line := range lines {
-		fmt.Println(colorYellow + line)
-	}
 }
 
 // printURLBox prints the per-URL scanning box, like the Python "━ Scanning URL:" box.

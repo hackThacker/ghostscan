@@ -183,11 +183,7 @@ func parseIntSafe(s string) (int, error) {
 	return sign * n, nil
 }
 
-// promptForURLsMSG and promptForPayloadsMSG wrap the ones from util.go with a
-// custom welcome message (used by SQL scanner).
+// promptForURLsMSG wraps promptForURLs with a custom welcome message.
 func promptForURLsMSG(welcomeMsg string) []string {
 	return promptForURLs(welcomeMsg)
-}
-func promptForPayloadsMSG(welcomeMsg string) []string {
-	return promptForPayloads(welcomeMsg)
 }
