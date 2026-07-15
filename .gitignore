@@ -7,11 +7,6 @@ ghostscan-update.exe
 *.out
 *.test
 
-# ── Payloads (embedded at build time, not pushed to repo) ─────────
-payloads/
-
-# ── Scripts / local tooling ───────────────────────────────────────
-scripts/
 
 # ── Release / dist ────────────────────────────────────────────────
 dist/
